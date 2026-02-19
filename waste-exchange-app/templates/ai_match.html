@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>AI Smart Waste Matching</h2>
+<a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+
+{% if matches %}
+<table border="1" cellpadding="5">
+<thead>
+<tr>
+    <th>Waste Type</th>
+    <th>Recommended Industries</th>
+</tr>
+</thead>
+<tbody>
+{% for m in matches %}
+<tr>
+    <td>{{ m.waste_type }}</td>
+    <td>{{ m.industries | join(', ') }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>No matching waste found based on your preferences.</p>
+{% endif %}
+{% endblock %}

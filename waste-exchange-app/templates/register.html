@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Register</h2>
+<form method="POST">
+    <label>Username: <input type="text" name="username" required /></label><br/>
+    <label>Email: <input type="email" name="email" required /></label><br/>
+    <label>Password: <input type="password" name="password" required /></label><br/>
+    <label>Role:
+      <select name="role" required>
+        <option value="">Select role</option>
+        <option value="buyer">Buyer</option>
+        <option value="seller">Seller</option>
+      </select>
+    </label><br/>
+    <label>Waste Types (comma separated):
+      <input type="text" name="waste_types" placeholder="e.g. glass,plastic,metal" required />
+    </label><br/>
+    <button type="submit">Register</button>
+</form>
+<a href="{{ url_for('login') }}">Login</a>
+{% endblock %}

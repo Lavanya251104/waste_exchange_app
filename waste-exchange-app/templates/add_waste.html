@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add Waste</h2>
+<form method="POST">
+    Waste Type:
+    <input type="text" name="type" required>
+
+    Quantity (kg):
+    <input type="number" name="quantity" required>
+
+    Description:
+    <textarea name="description"></textarea>
+
+    <button type="submit">Add Waste</button>
+</form>
+{% endblock %}

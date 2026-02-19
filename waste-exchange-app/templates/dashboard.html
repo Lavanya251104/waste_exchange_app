@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard ({{ role|capitalize }})</h2>
+
+<nav>
+    <a href="{{ url_for('ai_match') }}">AI Smart Matching</a> |
+    <a href="{{ url_for('logout') }}">Logout ({{ session.username }})</a>
+</nav>
+<hr/>
+
+{% if role == "seller" %}
+    <h3>Your Waste Listings</h3>
+    <a href="{{ url_for('add_waste') }}">Add New Waste</a>
+    {% if wastes %}
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for w in wastes %}
+                    <tr>
+                        <td>{{ w.type }}</td>
+                        <td>{{ w.quantity }}</td>
+                        <td>{{ w.description }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No waste listed yet.</p>
+    {% endif %}
+
+    <h3>Requests for Your Waste (Notifications)</h3>
+    {% if requests %}
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Buyer</th>
+                    <th>Waste Type</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in requests %}
+                    <tr>
+                        <td>{{ r.request_id }}</td>
+                        <td>{{ r.buyer_name }}</td>
+                        <td>{{ r.type }}</td>
+                        <td>{{ r.quantity }}</td>
+                        <td>{{ r.status }}</td>
+                        <td>
+                            {% if r.status == 'pending' %}
+                                <form action="{{ url_for('handle_request', request_id=r.request_id, action='accept') }}" method="POST" style="display:inline;">
+                                    <button type="submit">Accept</button>
+                                </form>
+                                <form action="{{ url_for('handle_request', request_id=r.request_id, action='deny') }}" method="POST" style="display:inline;">
+                                    <button type="submit">Deny</button>
+                                </form>
+                            {% else %}
+                                <span>-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No requests yet.</p>
+    {% endif %}
+
+{% else %}
+    <h3>Available Waste</h3>
+    {% if wastes %}
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Seller</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for w in wastes %}
+                    <tr>
+                        <td>{{ w.type }}</td>
+                        <td>{{ w.quantity }}</td>
+                        <td>{{ w.seller_name }}</td>
+                        <td>
+                            <form action="{{ url_for('create_request', waste_id=w.waste_id) }}" method="POST" onsubmit="return confirm('Request this waste?');">
+                                <button type="submit">Request</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No waste available currently.</p>
+    {% endif %}
+
+    <h3>Your Requests</h3>
+    {% if requests %}
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Waste Type</th>
+                    <th>Quantity</th>
+                    <th>Seller</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in requests %}
+                    <tr>
+                        <td>{{ r.request_id }}</td>
+                        <td>{{ r.type }}</td>
+                        <td>{{ r.quantity }}</td>
+                        <td>{{ r.seller_name }}</td>
+                        <td>{{ r.status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no requests yet.</p>
+    {% endif %}
+{% endif %}
+
+{% endblock %}
+

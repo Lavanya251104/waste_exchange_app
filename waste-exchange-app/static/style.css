@@ -1,0 +1,163 @@
+/* --- General Page Styles --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Header --- */
+h1 {
+    text-align: center;
+    color: #2a9d8f;
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #264653;
+    margin-bottom: 15px;
+}
+
+/* --- Navigation --- */
+nav {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #2a9d8f;
+    font-weight: 600;
+    margin: 0 10px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #2a9d8f;
+    color: #fff;
+}
+
+/* --- Forms --- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #2a9d8f;
+}
+
+button {
+    background-color: #2a9d8f;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #21867a;
+}
+
+/* --- Tables --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #2a9d8f;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+table tr:hover {
+    background-color: #e0f2f1;
+}
+
+/* --- Flash Messages --- */
+#messages {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+#messages li {
+    background-color: #e0f7fa;
+    color: #006064;
+    padding: 12px 15px;
+    border-left: 5px solid #2a9d8f;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+/* --- Links --- */
+a {
+    color: #2a9d8f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Textarea --- */
+textarea {
+    resize: vertical;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    nav a {
+        display: block;
+        margin: 5px 0;
+    }
+}

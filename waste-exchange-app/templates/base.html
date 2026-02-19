@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waste Exchange AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>♻️ Waste Exchange Platform</h1>
+    
+    <!-- Navigation -->
+    <nav>
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('dashboard') }}">Dashboard</a> |
+            {% if session.get('role') == 'seller' %}
+                <a href="{{ url_for('add_waste') }}">Add Waste</a> |
+            {% endif %}
+            {% if session.get('role') == 'buyer' %}
+                <a href="{{ url_for('ai_match') }}">AI Match</a> |
+            {% endif %}
+            <a href="{{ url_for('logout') }}">Logout ({{ session.get('username') }})</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a> |
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </nav>
+    <hr />
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul id="messages">
+                {% for msg in messages %}
+                    <li>{{ msg }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main content -->
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>
